@@ -1,7 +1,8 @@
-import { useState } from "react"
-import NavBarComp from "./NavBarComp"
+import { useState } from "react";
+import RecipeGeneratorCard from "./RecipeGeneratorCard";
+import AIReponseCard from "./AIReponseCard";
 
-interface IngredientProps { 
+interface IngredientProps {
   id: string;
   value: string;
 }
@@ -28,16 +29,17 @@ const CrossIcon = () => (
 const InputIngredients = () => {
   const [ingredients, setIngredients] = useState<IngredientProps[]>([]);
   const [currentIngredient, setCurrentIngredient] = useState("");
+  const [recipeShown, setRecipeShown] = useState(false);
 
   const handleAddIngredient = (event: React.FormEvent) => {
-    event.preventDefault();// Prevents the page from reloading on form submission
+    event.preventDefault(); // Prevents the page from reloading on form submission
     if (currentIngredient.trim() !== "") {
       const newIngredient: IngredientProps = {
         id: crypto.randomUUID(),
         value: currentIngredient.trim(),
-      }
-      setIngredients((prevIngredients => [...prevIngredients, newIngredient]));
-      setCurrentIngredient("");// Clear the input field after adding
+      };
+      setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+      setCurrentIngredient(""); // Clear the input field after adding
     }
   };
 
@@ -49,10 +51,7 @@ const InputIngredients = () => {
 
   const ingredientData = ingredients.map((item: IngredientProps) => {
     return (
-      <div
-        key={item.id}
-        className="flex flex-row items-center justify-between"
-      >
+      <div key={item.id} className="flex flex-row items-center justify-between">
         <li>{item.value}</li>
         <button
           onClick={() => handleRemoveIngredient(item.id)}
@@ -61,50 +60,50 @@ const InputIngredients = () => {
           <CrossIcon />
         </button>
       </div>
-    )
+    );
   });
 
   return (
-    <main>
+    <section>
       <form
         onSubmit={handleAddIngredient}
         className="flex flex-col md:flex-row items-center justify-center gap-3 p-5 
-      max-w-xl mx-auto">
+      max-w-xl mx-auto"
+      >
         <input
           type="text"
           placeholder="e.g. pineapple"
           aria-label="Add Ingredient"
           value={currentIngredient}
-          onChange={(e) => { setCurrentIngredient(e.target.value)}}
+          onChange={(e) => {
+            setCurrentIngredient(e.target.value);
+          }}
           className="flex-1 border border-gray-300 px-4 py-2 rounded-lg shadow-sm 
           focus:outline-none focus:ring-2 focus:ring-black transition"
         />
         <button
           type="submit"
           className="px-5 py-2 bg-black text-white font-medium rounded-lg 
-        shadow hover:bg-gray-800 transition">
+        shadow hover:bg-gray-800 transition"
+        >
           + Add Ingredient
         </button>
       </form>
 
       <div className="max-w-xl mx-auto p-5">
-        <h1 className="text-2xl md:text-3xl">Ingredients on hand:</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">Ingredients on hand:</h1>
         <ul className="list-disc list-inside mt-3 space-y-3">
           {ingredientData}
         </ul>
       </div>
-    </main>
-  )
-}
 
+      {/* Get recipe button */}
+      {ingredients.length > 3 ? <RecipeGeneratorCard /> : null}
 
-const ChefAI = () => {
-  return (
-    <section className="w-screen h-screen flex flex-col overflow-x-hidden bg-gray-100">
-      <NavBarComp navBarProps={{ imageSrc: "chef_hat.svg", title: "Chef AI" }} />
-      <InputIngredients />
+      {/* AI response */}
+      {recipeShown ? <AIReponseCard /> : null}
     </section>
-  )
+  );
 }
 
-export default ChefAI
+export default InputIngredients
