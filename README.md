@@ -1,29 +1,37 @@
-# React Learning Projects (React + TypeScript + TailWind + Vite)
+# React Learning Projects (React + TypeScript + Tailwind + Vite)
 
 This repository is a collection of small React projects built to demonstrate various core concepts, from basic component structure to advanced features. It serves as a practical guide and a hands-on learning resource.
 
 ## Project Screenshots
+
+### Simple Data List
+Show a simple data list built to get your hands dirty.
+
+| Desktop View | Mobile View |
+| :---: | :---: |
+| ![Simple Data List Desktop](./public/simple_list/desktop.jpeg) | ![Simple Data List Mobile](./public/simple_list/mobile.jpeg) |
 
 ### Travel Journal
 A responsive component that displays a list of travel entries.
 
 | Desktop View | Mobile View |
 | :---: | :---: |
-| ![Travel Journal Desktop](./public/travel-journal/desktop.png) | ![Travel Journal Mobile](./public/travel-journal/mobile.png) |
-
-### Chef AI
-An interactive app to manage a list of ingredients.
-
-| Desktop View | Mobile View |
-| :---: | :---: |
-| ![Chef AI Desktop](./public/chef-ai/desktop.png) | ![Chef AI Mobile](./public/chef-ai/mobile.png) |
+| ![Travel Journal Desktop](./public/travel_journal/desktop.jpeg) | ![Travel Journal Mobile](./public/travel_journal/mobile.jpeg) |
 
 ### Simple Form
 A modern contact form built using React 19 features.
 
 | Desktop View | Mobile View |
 | :---: | :---: |
-| ![Simple Form Desktop](./public/simple-form/desktop.png) | ![Simple Form Mobile](./public/simple-form/mobile.png) |
+| ![Simple Form Desktop](./public/simple-form/desktop.jpeg) | ![Simple Form Mobile](./public/simple-form/mobile.jpeg) |
+
+### Chef AI
+An interactive app to manage a list of ingredients.
+
+| Desktop View | Mobile View |
+| :---: | :---: |
+| ![Chef AI Desktop](./public/chef_ai/desktop.jpeg) | ![Chef AI Mobile](./public/chef_ai/mobile.jpeg) |
+
 
 ## Featured Libraries
 
@@ -47,8 +55,6 @@ import { FaPhone } from 'react-icons/fa';
 
 const MyComponent = () => <FaPhone />;
 ```
-
----
 
 ## React Learning Points in This Repo
 
