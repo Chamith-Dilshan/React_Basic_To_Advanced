@@ -23,7 +23,7 @@ A modern contact form built using React 19 features.
 
 | Desktop View | Mobile View |
 | :---: | :---: |
-| ![Simple Form Desktop](./public/simple-form/desktop.jpeg) | ![Simple Form Mobile](./public/simple-form/mobile.jpeg) |
+| ![Simple Form Desktop](./public/simple_form/desktop.jpeg) | ![Simple Form Mobile](./public/simple_form/mobile.jpeg) |
 
 ### Chef AI
 An interactive app to manage a list of ingredients.
@@ -55,13 +55,23 @@ import { FaPhone } from 'react-icons/fa';
 
 const MyComponent = () => <FaPhone />;
 ```
+### `react-markdown`
+A powerful and secure React component to render Markdown as HTML. It's essential for displaying user-generated content or, in this case, the formatted recipe from the AI. It can be paired with plugins like `@tailwindcss/typography` for beautiful default styling.
+
+**Usage:**
+```jsx
+import ReactMarkdown from 'react-markdown';
+
+const markdown = '# Hello, world!';
+const MyComponent = () => <ReactMarkdown>{markdown}</ReactMarkdown>;
+```
 
 ## React Learning Points in This Repo
 
-### 1. State and Event Handling (`ChefAI.tsx`)
+### 1. State, API, and Performance (`ChefAI.tsx`)
+- **Streaming API Requests:** Consuming a streaming response from an API (`fetch` with `ReadableStream`) to display real-time data from the Ollama model.
 - **State Management:** Using the `useState` hook to manage arrays (adding and removing ingredients).
 - **Event Handling:** Capturing user actions with `onSubmit` for forms and `onClick` for buttons.
-- **Controlled Components:** Linking form inputs to state with `value` and `onChange`.
 - **Unique Keys:** Generating unique IDs for list items using `crypto.randomUUID()` to ensure efficient rendering and state management.
 
 ### 2. Modern Form Handling with React 19 (`SimpleForm.tsx`)
@@ -82,3 +92,9 @@ const MyComponent = () => <FaPhone />;
 - **Layout:** Creating a sticky header that remains at the top of the viewport during scrolling.
 
 ---
+
+## Contributing & Support
+
+Contributions are welcome! If you have suggestions for improvements or find any issues, please feel free to open an issue or submit a pull request.
+
+If you find this repository useful, please consider giving it a ⭐ star

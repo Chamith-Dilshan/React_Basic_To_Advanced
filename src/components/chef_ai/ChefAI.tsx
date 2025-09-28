@@ -2,6 +2,7 @@ import { useState } from "react";
 import RecipeGeneratorCard from "./RecipeGeneratorCard";
 import AIReponseCard from "./AIReponseCard";
 import NavBarComp from "../NavBarComp";
+import { getRecipeStreamOllama } from "../../hooks/useOllamaStream";
 
 interface IngredientProps {
   id: string;
@@ -30,7 +31,9 @@ const CrossIcon = () => (
 const ChefAI = () => {
   const [ingredients, setIngredients] = useState<IngredientProps[]>([]);
   const [currentIngredient, setCurrentIngredient] = useState("");
-  const [recipeShown, setRecipeShown] = useState(false);
+  const [recipe, setRecipe] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleAddIngredient = (event: React.FormEvent) => {
     event.preventDefault(); // Prevents the page from reloading on form submission
@@ -63,6 +66,27 @@ const ChefAI = () => {
       </div>
     );
   });
+
+  const getRecipe = async () => {
+    // Reset state before starting
+    setRecipe("");
+    setError(null);
+    setIsLoading(true);
+
+    await getRecipeStreamOllama({
+      ingredientsArray: ingredients.map((item) => item.value),
+      onStream: (token) => {
+        setRecipe((prev) => prev + token);
+      },
+      onComplete: () => {
+        setIsLoading(false);
+      },
+      onError: (err) => {
+        setError(`Error: ${err.message}`);
+        setIsLoading(false);
+      },
+    });
+  };
 
   return (
     <main className="w-screen h-screen flex flex-col overflow-x-hidden bg-gray-100">
@@ -105,10 +129,14 @@ const ChefAI = () => {
         </div>
 
         {/* Get recipe button */}
-        {ingredients.length > 3 ? <RecipeGeneratorCard /> : null}
+        {ingredients.length > 3 ? (
+          <RecipeGeneratorCard handleClick={getRecipe} />
+        ) : null}
       </section>
       {/* AI response */}
-      {recipeShown ? <AIReponseCard /> : null}
+      <section className="max-w-xl mx-auto w-full px-5 pb-10 flex items-center justify-center">
+        <AIReponseCard recipe={recipe} isLoading={isLoading} error={error} />
+      </section>
     </main>
   );
 };
