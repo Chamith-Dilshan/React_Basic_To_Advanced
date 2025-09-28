@@ -45,7 +45,7 @@ const TravelJournal = () => {
     return (
         <section className='w-screen h-screen flex flex-col overflow-x-hidden'>
             {/* header part */}
-            <nav className='flex items-center justify-center p-5 bg-purple-600'>
+            <nav className='flex items-center justify-center p-5 bg-gray-700'>
                 <img src="react.svg" alt="logo" className="size-12" />
                 <span className="text-2xl md:text-3xl text-white m-3 uppercase">
                     <b>My Travel Journal</b>

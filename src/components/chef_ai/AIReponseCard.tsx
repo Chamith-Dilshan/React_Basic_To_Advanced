@@ -1,7 +1,5 @@
-
 const AIReponseCard = () => {
- 
-   return <div>hello</div>;
-}
+  return <section>Hello</section>;
+};
 
-export default AIReponseCard
+export default AIReponseCard;
