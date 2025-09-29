@@ -32,6 +32,13 @@ An AI intregrated app that gives you an recepie depends on a list of ingredients
 | :---: | :---: |
 | ![Chef AI Desktop](./public/chef_ai/desktop.jpeg) | ![Chef AI Mobile](./public/chef_ai/mobile.jpeg) |
 
+### Meme Generator
+A fun meme generator that fetches popular meme templates and allows you to add custom text.
+
+| Desktop View | Mobile View |
+| :---: | :---: |
+| ![Meme Generator Desktop](./public/meme_generator/desktop.jpeg) | ![Meme Generator Mobile](./public/meme_generator/mobile.jpeg) |
+
 
 ## Featured Libraries
 
@@ -100,6 +107,15 @@ const MyComponent = () => <ReactMarkdown>{markdown}</ReactMarkdown>;
 - **Unique Keys:** Generating unique IDs for list items using `crypto.randomUUID()` to ensure efficient rendering and state management.
 - **Controlled Components:** In some cases you have to use controlled component meaning that you need to use a 'useState' and 'onChange' parameter of input elements to collect and manage forms.(if the case is simple enough, use the new way of form handeling )
 ---
+
+### 5. API Integration and Data Fetching (`MemeGenerator.tsx`)
+- **useEffect Hook:** Fetching data from an external API only once when the component mounts using `useEffect` with an empty dependency array.
+- **API Data Management:** Storing fetched data in component state for later use without re-fetching.
+- **Random Selection:** Implementing logic to randomly select items from an array of fetched data.
+- **Error Handling:** Basic error handling for API requests using `.catch()`.
+- **State Updates:** Updating specific properties of an object state while preserving other properties using the spread operator.
+- **Custom CSS Classes:** Creating reusable utility classes with Tailwind's `@apply` directive for complex styling like text shadows.
+- **Absolute Positioning:** Using CSS positioning to overlay text on images at specific locations.
 
 ## Contributing & Support
 

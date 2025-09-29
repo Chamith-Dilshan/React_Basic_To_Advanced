@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBarComp from "../NavBarComp";
 import MemeDataForm from "./MemeDataForm";
 import MemePreview from "./MemePreview";
-import type { MemeData } from "./types/MemeData";
+import type { MemeData, ApiMemeProps } from "./types/MemeData";
 
 const MemeGenerator = () => {
   const [memeData, setMemeData] = useState<MemeData>({
@@ -10,6 +10,26 @@ const MemeGenerator = () => {
     bottomText: "walks into Mordor.",
     imageUrl: "https://i.imgflip.com/1bij.jpg",
   });
+
+  // State to hold the array of all memes from the API
+  const [allMemes, setAllMemes] = useState<ApiMemeProps[]>([]);
+
+  // Fetch memes from the API only once when the component loads
+  //When using async function directly in useEffect, it returns a promise which is not allowed.
+  //So we define a cleanup function that does the async work and return it from useEffect.
+  useEffect(() => {
+    return () => {
+      fetch("https://api.imgflip.com/get_memes")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setAllMemes(data.data.memes);
+          }
+        })
+        .catch((error) => console.error("Failed to fetch memes:", error));
+      console.log("Meme Api request made");
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -21,14 +41,17 @@ const MemeGenerator = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const getRandomMeme = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", memeData);
-    // Here you would typically send the data to a server
-    alert(
-      "Form submitted! Check the console for the data.\nForm Data: " +
-        JSON.stringify(memeData)
-    );
+    if (allMemes.length > 0) {
+      const randomNumber = Math.floor(Math.random() * allMemes.length);
+      const randomMeme = allMemes[randomNumber];
+      setMemeData((prevData) => ({
+        ...prevData,
+        imageUrl: randomMeme.url,
+      }));
+      console.log("Random meme", randomNumber);
+    }
   };
 
   return (
@@ -43,7 +66,7 @@ const MemeGenerator = () => {
       <MemeDataForm
         memeData={memeData}
         onChange={handleChange}
-        onSubmit={handleSubmit}
+        onSubmit={getRandomMeme}
       />
       <MemePreview memeData={memeData} />
     </main>
