@@ -13,8 +13,8 @@ const SimpleForm = () => {
     from React 19 you can simply use action attribute to submit form data 
     to the server without any page reload or reset React will take care of all the 
     default part that we need to do in previous versions.you no longer need to provide 
-    a method attribute to the form as well.In this method you need to use UseState and
-    use value and onChange attributes of the input fields and manage all the actions.
+    a 'method' prop to the form as well.In the Old way, you need to use 'UseState' of React and
+    use 'value', 'onChange' props of the input fields and manage form actions and data.
     This whole setup is called control componets.
     you can refer the prevously use methods in the commented handleSubmit function.
 
