@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RecipeGeneratorCard from "./RecipeGeneratorCard";
 import AIReponseCard from "./AIReponseCard";
 import NavBarComp from "../NavBarComp";
@@ -35,6 +35,18 @@ const ChefAI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Add ref to track the current request
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+
   const handleAddIngredient = (event: React.FormEvent) => {
     event.preventDefault(); // Prevents the page from reloading on form submission
     if (currentIngredient.trim() !== "") {
@@ -68,24 +80,43 @@ const ChefAI = () => {
   });
 
   const getRecipe = async () => {
+    // Cancel any existing request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    // Create new AbortController for this request
+    abortControllerRef.current = new AbortController();
+
     // Reset state before starting
     setRecipe("");
     setError(null);
     setIsLoading(true);
 
-    await getRecipeStreamOllama({
-      ingredientsArray: ingredients.map((item) => item.value),
-      onStream: (token) => {
-        setRecipe((prev) => prev + token);
-      },
-      onComplete: () => {
-        setIsLoading(false);
-      },
-      onError: (err) => {
-        setError(`Error: ${err.message}`);
-        setIsLoading(false);
-      },
-    });
+    try {
+      await getRecipeStreamOllama({
+        ingredientsArray: ingredients.map((item) => item.value),
+        signal: abortControllerRef.current.signal,
+        onStream: (token) => {
+          setRecipe((prev) => prev + token);
+        },
+        onComplete: () => {
+          setIsLoading(false);
+          abortControllerRef.current = null; // Clear the reference
+        },
+        onError: (err) => {
+          if (err.message === "Request was aborted") {
+            // Don't show error for user-initiated cancellations
+            return;
+          }
+          setError(`Error: ${err.message}`);
+          setIsLoading(false);
+          abortControllerRef.current = null; // Clear the reference
+        },
+      });
+    } catch (error) {
+      console.error("Recipe generation failed:", error);
+    }
   };
 
   return (

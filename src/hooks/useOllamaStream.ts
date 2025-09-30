@@ -19,7 +19,8 @@ export async function getRecipeStreamOllama({
   onStream,
   onComplete,
   onError,
-}: StreamOllamaOptions) {
+  signal,
+}: StreamOllamaOptions & { signal?: AbortSignal }) {
   if (!ingredientsArray || ingredientsArray.length === 0) {
     onError(new Error("No ingredients provided."));
     return;
@@ -69,6 +70,7 @@ Follow this exact Markdown format for your response:
         prompt,
         stream: true,
       }),
+      signal, // Pass the abort signal to fetch
     });
 
     if (!res.ok) {
@@ -85,34 +87,43 @@ Follow this exact Markdown format for your response:
     const decoder = new TextDecoder();
     let buffer = "";
 
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) {
-        onComplete(); // Signal that the stream has finished successfully
-        break;
-      }
+    try {
+      while (true) {
+        const { value, done } = await reader.read();
 
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split("\n");
+        // Check if we should abort
+        if (signal?.aborted) {
+          reader.cancel();
+          throw new Error("Request was aborted");
+        }
 
-      // Keep the last partial line in the buffer
-      buffer = lines.pop() || "";
+        if (done) {
+          onComplete();
+          break;
+        }
 
-      for (const line of lines) {
-        if (!line.trim()) continue;
-        try {
-          const json = JSON.parse(line);
-          if (json.response) {
-            onStream(json.response); // Callback with each new token
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const json = JSON.parse(line);
+            if (json.response) {
+              onStream(json.response);
+            }
+            if (json.error) {
+              throw new Error(`Ollama API Error: ${json.error}`);
+            }
+          } catch (err) {
+            console.error("Failed to parse streaming line:", line, err);
           }
-          if (json.error) {
-            throw new Error(`Ollama API Error: ${json.error}`);
-          }
-        } catch (err) {
-          console.error("Failed to parse streaming line:", line, err);
-          // Continue to the next line, as one corrupted line shouldn't stop the whole stream
         }
       }
+    } finally {
+      // Always clean up the reader
+      reader.releaseLock();
     }
   } catch (error) {
     console.error("An error occurred during the Ollama stream:", error);

@@ -100,7 +100,7 @@ const MyComponent = () => <ReactMarkdown>{markdown}</ReactMarkdown>;
 
 ### 4. State, API, and Performance (`ChefAI.tsx`)
 - **Ollama:** For this part you need to have up and running ollama in your local environment. And don't forget to change the code and add your own model.
-- **Streaming API Requests:** Consuming a streaming response from an API (`fetch` with `ReadableStream`) to display real-time data from the Ollama model.
+- **HTTP Streaming:** REST API request that uses HTTP streaming (specifically Server-Sent Events style streaming that is Unidirectional, one-time request that streams the response) to display real-time data from the Ollama model.
 - **State Management:** Using the `useState` hook to manage arrays, loading states, and streaming text content.
 - **Event Handling & Listeners:** Capturing user actions with `onSubmit` for forms and `onClick` for buttons.
 - **Conditional Rendering:** Displaying UI elements based on application state, such as showing the "Generate Recipe" button only when ingredients are present, and rendering loading, error, or content states in the response card.
