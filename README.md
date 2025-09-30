@@ -39,6 +39,12 @@ A fun meme generator that fetches popular meme templates and allows you to add c
 | :---: | :---: |
 | ![Meme Generator Desktop](./public/meme_generator/desktop.jpeg) | ![Meme Generator Mobile](./public/meme_generator/mobile.jpeg) |
 
+### Tenzies Game
+An interactive dice game where players roll until all dice show the same number, with visual effects and accessibility features.
+
+| Desktop View | Mobile View |
+| :---: | :---: |
+| ![Tenzies Game Desktop](./public/tenzies_game/desktop.jpeg) | ![Tenzies Game Mobile](./public/tenzies_game/mobile.jpeg) |
 
 ## Featured Libraries
 
@@ -49,8 +55,9 @@ A utility function for merging Tailwind CSS classes in JS without style conflict
 ```jsx
 import { twMerge } from 'tailwind-merge';
 
-// The output will be 'p-4 bg-blue-500'
-const mergedClasses = twMerge('p-4 bg-red-500', 'bg-blue-500'); 
+// The output will replace same default tailwind classes with provided containerClass styles.
+const mergedClasses = twMerge(`bg-indigo-600 hover:bg-indigo-700 text-white font-semibold 
+        px-6 py-2 rounded-md mt-6 transition-colors`, containerClass); 
 ```
 
 ### `react-icons`
@@ -71,6 +78,37 @@ import ReactMarkdown from 'react-markdown';
 
 const markdown = '# Hello, world!';
 const MyComponent = () => <ReactMarkdown>{markdown}</ReactMarkdown>;
+```
+### `nanoid`
+A tiny, secure, URL-friendly unique string ID generator for JavaScript. Perfect for generating unique keys for React components or any situation where you need non-colliding identifiers.
+
+**Usage:**
+```jsx
+import { nanoid } from 'nanoid';
+
+const id = nanoid(); // "V1StGXR8_Z5jdHi6B-myT"
+```
+
+### `gsap` (GreenSock Animation Platform)
+A powerful JavaScript animation library that makes it easy to create high-performance animations. It's more performant than CSS animations for complex sequences and provides precise control over timing and easing.
+
+**Usage:**
+```jsx
+import { gsap } from 'gsap';
+
+gsap.to(element, { x: 100, duration: 2 });
+```
+
+### `react-confetti`
+A React component that creates a customizable confetti effect for celebrations. It automatically detects window dimensions and provides smooth animations.
+
+**Usage:**
+```jsx
+import Confetti from 'react-confetti';
+
+const MyComponent = () => (
+  <Confetti width={window.innerWidth} height={window.innerHeight} />
+);
 ```
 
 ## React Learning Points in This Repo
@@ -116,6 +154,18 @@ const MyComponent = () => <ReactMarkdown>{markdown}</ReactMarkdown>;
 - **State Updates:** Updating specific properties of an object state while preserving other properties using the spread operator.
 - **Custom CSS Classes:** Creating reusable utility classes with Tailwind's `@apply` directive for complex styling like text shadows.
 - **Absolute Positioning:** Using CSS positioning to overlay text on images at specific locations.
+
+### 6. Interactive Game Logic and Accessibility (`TenziesGame.tsx`)
+- **Game State Management:** Managing complex game state with `useState`, including arrays of objects with multiple properties (id, value, isHeld).
+- **Functional State Updates:** Using `setDice(prevDice => ...)` to avoid stale closure issues and ensure state updates work with the current state.
+- **useRef for DOM Manipulation:** Using `useRef` to reference DOM elements for focus management, ensuring keyboard users can navigate the game properly.
+- **useEffect for Side Effects:** Implementing `useEffect` to handle focus management when game state changes, demonstrating proper cleanup and dependency management.
+- **Accessibility (a11y):** Implementing ARIA attributes (`aria-pressed`, `aria-label`, `aria-live`) to make the game accessible to screen readers and assistive technologies.
+- **Lazy State Initialization:** Using `useState(() => generateNewDiceValues())` to initialize state with a function, preventing unnecessary recalculations on re-renders.
+- **Animation Integration:** Using GSAP for custom confetti animations that perform better than CSS animations for complex sequences.
+- **Conditional Rendering:** Showing different UI elements (confetti, button text) based on game state.
+- **Event Handling:** Managing click events with proper state updates and avoiding direct state mutation.
+- **Screen Reader Support:** Providing invisible text updates (`sr-only` class) to announce game status changes to screen readers.
 
 ## Contributing & Support
 
