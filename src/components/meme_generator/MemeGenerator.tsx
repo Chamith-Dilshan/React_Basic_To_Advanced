@@ -15,8 +15,9 @@ const MemeGenerator = () => {
   const [allMemes, setAllMemes] = useState<ApiMemeProps[]>([]);
 
   // Fetch memes from the API only once when the component loads
-  //When using async function directly in useEffect, it returns a promise which is not allowed.
-  //So we define a cleanup function that does the async work and return it from useEffect.
+  /*
+  React’s useEffect callback is not meant to return a promise, but an optional cleanup function. Making the effect callback async changes its return type to a promise, which can cause subtle bugs and warnings.So use then/catch instead of async/await here.
+  */
   useEffect(() => {
     return () => {
       fetch("https://api.imgflip.com/get_memes")

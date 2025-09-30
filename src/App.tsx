@@ -1,8 +1,8 @@
 // import SimpleForm from './components/SimpleForm'
 // import SimpleList from './components/SimpleList'
 // import TravelJournal from './components/TravelJournal'
-//import ChefAI from "./components/chef_ai/ChefAI";
-import MemeGenerator from "./components/meme_generator/MemeGenerator";
+import ChefAI from "./components/chef_ai/ChefAI";
+// import MemeGenerator from "./components/meme_generator/MemeGenerator";
 import "./index.css";
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
       {/* <SimpleList /> */}
       {/* <TravelJournal /> */}
       {/* <SimpleForm /> */}
-      {/* <ChefAI /> */}
-      <MemeGenerator />
+      <ChefAI />
+      {/* <MemeGenerator /> */}
     </>
   );
 }

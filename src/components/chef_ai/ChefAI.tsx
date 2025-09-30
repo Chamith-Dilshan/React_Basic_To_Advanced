@@ -37,6 +37,23 @@ const ChefAI = () => {
 
   // Add ref to track the current request
   const abortControllerRef = useRef<AbortController | null>(null);
+  const recipeSectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (recipe !== "" && recipeSectionRef.current) {
+      recipeSectionRef.current.scrollIntoView({ behavior: "smooth" });
+      // if above doesn't work, use below
+      // Scroll to the recipe section smoothly
+      // if (recipeSectionRef.current) {
+      //   const yOffset = -100; // Adjust this value based on your header height
+      //   const y =
+      //     recipeSectionRef.current.getBoundingClientRect().top +
+      //     window.pageYOffset +
+      //     yOffset;
+      //   window.scrollTo({ top: y, behavior: "smooth" });
+      // }
+    }
+  }, [recipe]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -161,7 +178,10 @@ const ChefAI = () => {
 
         {/* Get recipe button */}
         {ingredients.length > 3 ? (
-          <RecipeGeneratorCard handleClick={getRecipe} />
+          <RecipeGeneratorCard
+            scrollRef={recipeSectionRef}
+            handleClick={getRecipe}
+          />
         ) : null}
       </section>
       {/* AI response */}

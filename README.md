@@ -109,10 +109,10 @@ const MyComponent = () => <ReactMarkdown>{markdown}</ReactMarkdown>;
 ---
 
 ### 5. API Integration and Data Fetching (`MemeGenerator.tsx`)
-- **useEffect Hook:** Fetching data from an external API only once when the component mounts using `useEffect` with an empty dependency array.
+- **useEffect Hook:** Fetching data from an imgflip API only once when the component mounts using `useEffect` with an empty dependency array.
 - **API Data Management:** Storing fetched data in component state for later use without re-fetching.
 - **Random Selection:** Implementing logic to randomly select items from an array of fetched data.
-- **Error Handling:** Basic error handling for API requests using `.catch()`.
+- **Error Handling:**  Error handling for API requests using `.catch()`.
 - **State Updates:** Updating specific properties of an object state while preserving other properties using the spread operator.
 - **Custom CSS Classes:** Creating reusable utility classes with Tailwind's `@apply` directive for complex styling like text shadows.
 - **Absolute Positioning:** Using CSS positioning to overlay text on images at specific locations.
