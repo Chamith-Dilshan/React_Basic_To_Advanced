@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { gsap } from "gsap";
 import Confetti from "react-confetti";
 import DieCard from "./DieCard";
-import CustomButton from "./CustomButton";
+import CustomButton from "../CustomButton";
 
 interface diceProps {
   id: string;

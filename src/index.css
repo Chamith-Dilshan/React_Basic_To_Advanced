@@ -11,9 +11,8 @@
   }
 }
 
-@layer components {
-  .meme-text {
-    @apply absolute left-0 right-0 w-full break-words px-4 text-center font-sans md:text-3xl font-black uppercase text-white;
+@utility meme-text{
+  @apply absolute left-0 right-0 w-full break-words px-4 text-center font-sans md:text-3xl font-black uppercase text-white;
     text-shadow:
       2px 2px 0 #000,
       -2px -2px 0 #000,
@@ -24,5 +23,19 @@
       0 -2px 0 #000,
       -2px 0 0 #000,
       2px 2px 5px #000;
-  }
+}
+
+@utility rotate-y-180{
+  transform: rotateY(180deg);
+}
+
+@utility preserve-3d{
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden{
+  backface-visibility: hidden;
+}
+@utility rotate-y-180{
+  transform: rotateY(180deg);
 }
