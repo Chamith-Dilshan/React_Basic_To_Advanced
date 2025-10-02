@@ -2,6 +2,7 @@ interface KeyboardProps {
   handleClick: (char: string) => void;
   GuessedRightKeys: string[];
   GuessedWrongKeys: string[];
+  isDesabled: boolean;
 }
 
 const rows = [
@@ -14,6 +15,7 @@ const Keybord = ({
   handleClick,
   GuessedRightKeys,
   GuessedWrongKeys,
+  isDesabled,
 }: KeyboardProps) => {
   return (
     <div
@@ -29,7 +31,9 @@ const Keybord = ({
               <button
                 key={char}
                 onClick={() => handleClick(char)}
-                disabled={isDisabledRight || isDisabledWrong}
+                disabled={isDisabledRight || isDisabledWrong || isDesabled}
+                aria-disabled={isDisabledRight || isDisabledWrong || isDesabled}
+                aria-label={`Letter ${char}`}
                 className={`w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center rounded-md font-bold text-white text-sm sm:text-base
                   transition-colors duration-200
                   ${

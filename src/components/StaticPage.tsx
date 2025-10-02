@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-runtime"
 
-const SimpleList = () => {
+const StaticPage = () => {
     return (
         // you can use Fragmants or empty tags <></> 
         // instead of div to avoid unnecessary nodes in the DOM
@@ -46,4 +46,4 @@ const SimpleList = () => {
     )
 }
 
-export default SimpleList
+export default StaticPage;

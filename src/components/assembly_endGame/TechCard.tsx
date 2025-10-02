@@ -21,8 +21,8 @@ const TechCard = ({ languageData, isDead }: TechCardProps) => {
   }, [isDead]);
 
   return (
-    <div className="w-28 h-6 perspective-[1000px]">
-      <div className="relative w-full h-full preserve-3d" ref={cardRef}>
+    <div className="w-28 h-6 perspective-distant">
+      <div className="relative w-full h-full transform-3d" ref={cardRef}>
         {/* Front side (language name) */}
         <div
           className="absolute w-full h-full flex items-center justify-center font-semibold 
