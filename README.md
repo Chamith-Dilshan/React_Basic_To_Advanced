@@ -146,12 +146,12 @@ const MyComponent = () => (
 
 <div align="center">
 
-**Comprehensive breakdown of React concepts, patterns, and best practices demonstrated in each project**
+> **Comprehensive breakdown of React concepts, patterns, and best practices demonstrated in each project**
 
 </div>
 
 <details>
-<summary><strong>📋 Quick Overview of Topics Covered</strong></summary>
+<strong>📋 Quick Overview of Topics Covered</strong>
 <br>
 
 - 🎨 **Layout & Responsive Design** - Flexbox, Grid, Tailwind responsive patterns
@@ -184,8 +184,8 @@ const MyComponent = () => (
 ### ⭐ Star this repository if it helped you!
 
 <p>
-<img src="https://img.shields.io/github/stars/yourusername/react_basic?style=social" alt="GitHub stars" />
-<img src="https://img.shields.io/github/forks/yourusername/react_basic?style=social" alt="GitHub forks" />
+<img src="https://img.shields.io/github/stars/Chamith-Dilshan/react_basic?style=social" alt="GitHub stars" />
+<img src="https://img.shields.io/github/forks/Chamith-Dilshan/react_basic?style=social" alt="GitHub forks" />
 </p>
 
 **Built with ❤️ for the React community**
