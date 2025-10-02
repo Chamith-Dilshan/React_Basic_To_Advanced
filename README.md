@@ -150,8 +150,7 @@ const MyComponent = () => (
 
 </div>
 
-<details>
-<strong>📋 Quick Overview of Topics Covered</strong>
+<summary><strong>📋 Quick Overview of Topics Covered</strong></summary>
 <br>
 
 - 🎨 **Layout & Responsive Design** - Flexbox, Grid, Tailwind responsive patterns
@@ -162,8 +161,6 @@ const MyComponent = () => (
 - ♿ **Accessibility** - ARIA attributes, screen readers, keyboard navigation
 - 🚀 **Performance** - Lazy initialization, cleanup patterns, optimization
 - 🔧 **TypeScript** - Interfaces, type safety, proper typing patterns
-
-</details>
 
 ---
 
@@ -184,8 +181,8 @@ const MyComponent = () => (
 ### ⭐ Star this repository if it helped you!
 
 <p>
-<img src="https://img.shields.io/github/stars/Chamith-Dilshan/react_basic?style=social" alt="GitHub stars" />
-<img src="https://img.shields.io/github/forks/Chamith-Dilshan/react_basic?style=social" alt="GitHub forks" />
+<img src="https://img.shields.io/github/stars/Chamith-Dilshan/React_Basic_To_Advanced?style=social" alt="GitHub stars" />
+<img src="https://img.shields.io/github/forks/Chamith-Dilshan/React_Basic_To_Advanced?style=social" alt="GitHub forks" />
 </p>
 
 **Built with ❤️ for the React community**
